@@ -1,0 +1,47 @@
+﻿@model BindSelectListItem.Models.BudgetPrepViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form asp-action="Index">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Program</th>
+                    <th>Area</th>
+                    <th>GARate</th>
+                    <th>OverheadRate</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i=0; i<Model.WorksheetRates.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.WorksheetRates[i].Id
+                            <input hidden asp-for="WorksheetRates[i].Id" /> 
+                        </td>
+                        <td>
+                            @Model.WorksheetRates[i].Program
+                        </td>
+                        <td>
+                            @Model.WorksheetRates[i].Area
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(x => x.WorksheetRates[i].GARateID, Model.GARateList, new { @style = "width:280px;" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(x => x.WorksheetRates[i].OverheadRateID, Model.OverheadRateList, new { @style = "width:280px;" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button>Submit</button>
+    </div>
+</form>
